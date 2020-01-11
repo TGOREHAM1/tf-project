@@ -5,5 +5,6 @@ variable "instance_key_pair" {
 
 variable "instance_name" {
     description = "name of EC2 instance"
-    type = "string"  
+    type = string  
 }
+
