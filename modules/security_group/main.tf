@@ -37,7 +37,7 @@ resource "aws_security_group_rule" "allow_http_i" {
 
 resource "aws_security_group_rule" "allow_https_i" {
   type = "ingress"
-  description = "allows https access on port 80"
+  description = "allows https access on port 443"
   cidr_blocks = ["0.0.0.0/0"]
   from_port = 443
   to_port = 443
@@ -57,7 +57,7 @@ resource "aws_security_group_rule" "allow_http_e" {
 
 resource "aws_security_group_rule" "allow_https_e" {
   type = "egress"
-  description = "allows https access on port 80"
+  description = "allows https access on port 443"
   cidr_blocks = ["0.0.0.0/0"]
   from_port = 443
   to_port = 443

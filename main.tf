@@ -14,12 +14,6 @@ module "bucket" {
   region = var.region
 }
 
-module "iam" {
-  source = "./modules/iam"
-  
-}
-
-
 output "instance_ip" {
   value = module.instance.instance_public_ip
 }

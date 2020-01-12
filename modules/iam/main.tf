@@ -12,7 +12,7 @@ resource "aws_iam_role" "s3_for_wp_role" {
 }
 
 resource "aws_iam_role_policy" "s3_for_wp_role_pol" {
-    policy = file("${path.module}/s3-public-access-pol.json")
+    policy = file("./modules/iam/AmazonS3FullAccess.json")
     role = aws_iam_role.s3_for_wp_role.id
 }
 
