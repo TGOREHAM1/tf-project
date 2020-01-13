@@ -8,14 +8,21 @@ resource "aws_instance" "tf_prj_jump_box" {
   }
   vpc_security_group_ids = [
       module.security_group.ssh_security_group_id,
-      module.security_group.https_security_group_id
+      module.security_group.https_security_group_id,
+      module.security_group.ec2_mysql_security_group_id
   ]
   user_data = file ("${path.module}/csa-ha-wp-bash.sh")
   iam_instance_profile = module.iam.instance_profile.name
 }
 
+module "db" {
+  source = "/Users/tomg/Documents/tf-project/modules/db"
+  source_sgs = module.security_group.https_security_group_id
+}
+
 module "security_group" {
   source = "/Users/tomg/Documents/tf-project/modules/security_group"
+  source_sgs = module.db.rds_mysql_sg_id
 }
 
 module "iam" {

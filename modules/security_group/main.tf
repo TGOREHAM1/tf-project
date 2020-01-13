@@ -65,30 +65,30 @@ resource "aws_security_group_rule" "allow_https_e" {
   security_group_id = aws_security_group.https_sg.id
 }
 
-resource "aws_security_group" "rds_mysql_sg" {
-  name = "sec-grp-mysql"
+resource "aws_security_group" "ec2_mysql_sg" {
+  name = "sec-grp-ec2-mysql"
   description = "security group to allow access on port 3306"
   tags = {
     Project = "tf-project"
   }
 }
 
-resource "aws_security_group_rule" "allow_mysql_i" {
+resource "aws_security_group_rule" "allow_ec2_mysql_i" {
   type = "ingress"
   description = "allows mysql access on port 3306"
-  source_security_group_id = aws_security_group.https_sg.id
+  source_security_group_id = var.source_sgs
   from_port = 3306
   to_port = 3306
   protocol = "tcp"
-  security_group_id = aws_security_group.rds_mysql_sg.id 
+  security_group_id = aws_security_group.ec2_mysql_sg.id 
 }
 
-resource "aws_security_group_rule" "allow_mysql_e" {
+resource "aws_security_group_rule" "allow_ec2_mysql_e" {
   type = "egress"
   description = "allows mysql access on port 3306"
-  source_security_group_id = aws_security_group.https_sg.id
+  source_security_group_id = var.source_sgs
   from_port = 3306
   to_port = 3306
   protocol = "tcp"
-  security_group_id = aws_security_group.rds_mysql_sg.id 
+  security_group_id = aws_security_group.ec2_mysql_sg.id 
 }
