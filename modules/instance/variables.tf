@@ -8,3 +8,14 @@ variable "instance_name" {
     type = string  
 }
 
+variable "instance_profile" {
+    description = "instance profile attached to the instance"
+    type = string  
+}
+
+variable "security_groups" {
+    description = "security groups to assign to the instance"
+    type = string
+}
+
+
