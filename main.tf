@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 data "aws_route53_zone" "tomgoreham_co_uk" {
-  name         = "tomgoreham.co.uk."
+  name = "tomgoreham.co.uk."
 }
 
 resource "aws_route53_record" "tomgoreham_co_uk_a" {
@@ -39,6 +39,8 @@ module "bucket" {
 module "db" {
   source = "./modules/db"
   source_sgs = module.security_group.https_security_group_id
+  rds_username = var.db_username
+  rds_password = var.db_password
 }
 
 module "security_group" {
