@@ -3,12 +3,24 @@ provider "aws" {
   profile = "default"
 }
 
-resource "aws_route53_record" "tomgoreham_co_uk" {
-  zone_id = "Z35CLHFG2ULC3O"
+data "aws_route53_zone" "tomgoreham_co_uk" {
+  name         = "tomgoreham.co.uk."
+}
+#Z35CLHFG2ULC3O
+resource "aws_route53_record" "tomgoreham_co_uk_a" {
+  zone_id = data.aws_route53_zone.tomgoreham_co_uk.zone_id
   name = "www.tomgoreham.co.uk"
   type = "A"
   ttl = 300
   records = [module.instance.instance_public_ip]  
+}
+
+resource "aws_route53_record" "tomgoreham_co_uk_cname" {
+  zone_id = data.aws_route53_zone.tomgoreham_co_uk.zone_id
+  name = "www.tomgoreham.co.uk"
+  type = "CNAME"
+  ttl = 300
+  records = ["${module.instance.instance_public_dns}"]
 }
 
 module "instance" {
