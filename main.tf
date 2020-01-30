@@ -6,7 +6,7 @@ provider "aws" {
 data "aws_route53_zone" "tomgoreham_co_uk" {
   name         = "tomgoreham.co.uk."
 }
-#Z35CLHFG2ULC3O
+
 resource "aws_route53_record" "tomgoreham_co_uk_a" {
   zone_id = data.aws_route53_zone.tomgoreham_co_uk.zone_id
   name = "www.tomgoreham.co.uk"
